@@ -22,6 +22,12 @@ If true, enable read and write access for authenticated users to the repository.
 
 First pre-created repository's name.(default: ```project-in-svn```)
 
+### ```REVISION_PROPERTY_CHANGE```
+
+If true, enable revision property change like editing log message
+or loading dump by executing ```svnrdump``` command.
+(default: ```false```)
+
 ### ```USER_x_NAME```
 
 User name to authenticate for repository.

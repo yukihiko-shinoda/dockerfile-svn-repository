@@ -5,6 +5,7 @@ set -eu
 # * User name and password is reading in bellow while loop by using eval.
 AUTH_ACCESS_WRITE=${AUTH_ACCESS_WRITE-true}
 REPOSITORY_NAME=${REPOSITORY_NAME-project-in-svn}
+REVISION_PROPERTY_CHANGE=${REVISION_PROPERTY_CHANGE-false}
 
 # Constant
 REPO_DIR=/var/opt/svn/"${REPOSITORY_NAME}"
@@ -35,5 +36,10 @@ do
   echo "${user_name} = ${user_pass}" >> "${PATH_SVN_PASSWD}"
   index=$((index + 1))
 done
+
+if [ "${REVISION_PROPERTY_CHANGE}" = 'true' ]; then
+  cp -p "$REPO_DIR"/hooks/pre-revprop-change.tmpl "$REPO_DIR"/hooks/pre-revprop-change
+  chmod +x "$REPO_DIR"/hooks/pre-revprop-change
+fi
 
 exec "${@}"
